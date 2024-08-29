@@ -26,24 +26,26 @@ public class movimientoScript : MonoBehaviour
         moverHorizontal = Input.GetAxis("Horizontal");
         
         saltar();
+        mover();
     }
 
     private void FixedUpdate()
     {
-        mover();
+        
     }
 
     void mover()
     {
-        
 
-        if(moverHorizontal < 0 && derecha)
+
+        if (moverHorizontal < 0 && derecha)
         {
             Vector3 escala = transform.localScale;
             escala.x *= -1;
             transform.localScale = escala;
             derecha = false;
-        }else if(moverHorizontal > 0 && !derecha)
+        }
+        else if (moverHorizontal > 0 && !derecha)
         {
             Vector3 escala = transform.localScale;
             escala.x *= -1;

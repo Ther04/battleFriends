@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpForce: 10
+  jumpForce: 20
   moverHorizontal: 0
   suavizado: 0.15
 --- !u!1 &1212478554

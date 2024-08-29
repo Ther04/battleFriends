@@ -6,7 +6,7 @@ public class movimientoScript : MonoBehaviour
 {
     [Header("movimiento")]
     public float speed = 5f;
-    public float jumpForce = 2f;
+    public float jumpForce = 20f;
     public float moverHorizontal; 
     private Rigidbody2D rb;
     private Vector3 velocidad = Vector3.zero;

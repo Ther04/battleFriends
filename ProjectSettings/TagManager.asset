@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Superior
   - Inferior
+  - Ground
   layers:
   - Default
   - TransparentFX

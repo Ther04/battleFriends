@@ -963,7 +963,6 @@ GameObject:
   - component: {fileID: 1518524397}
   - component: {fileID: 1518524396}
   - component: {fileID: 1518524398}
-  - component: {fileID: 1518524399}
   - component: {fileID: 1518524400}
   - component: {fileID: 1518524401}
   m_Layer: 0
@@ -1100,18 +1099,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1518524399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518524394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7799e9eb8be3168478372e1fd0280bfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1518524400
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1169,6 +1156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5c890a4827c954cb3da39c30eac2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atacando: 0
+  animacion: {fileID: 0}
+  golpeBasico: 122
+  patadaBasica: 120
+  SonidoGolpe: {fileID: 0}
+  miniSonidos: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

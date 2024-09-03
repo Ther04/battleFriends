@@ -23,8 +23,16 @@ public class movimientoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moverHorizontal = Input.GetAxis("Horizontal");
-        
+        //moverHorizontal = Input.GetAxis("Horizontal");
+        moverHorizontal = 0f;
+        if (Input.GetKey(KeyCode.A))
+        {
+            moverHorizontal = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D)) 
+        { 
+            moverHorizontal = 1f; 
+        } 
         saltar();
         mover();
     }

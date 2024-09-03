@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class golpes : MonoBehaviour
 {
+    [Header("Objeto Cooldown")]
+    [SerializeField]private cooldown Cooldown;
+
     [Header("contadores de combos")]
     private int combo1 = 0;
 
@@ -29,13 +32,17 @@ public class golpes : MonoBehaviour
     void Update()
     {
         combos();
-        Debug.Log(combo1);
+        //Debug.Log(combo1);
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
 
     public void empezarCombo()
     {
-        //atacando = false;
+        atacando = false;
         if(combo1 < 3)
         {
             combo1++;
@@ -44,23 +51,25 @@ public class golpes : MonoBehaviour
 
     public void finalizarCombo()
     {
-        //atacando = false;
+        atacando = false;
         combo1 = 0;
+        Cooldown.empezarCooldown();
     }
 
     void combos()
     {
+        if(Cooldown.noPuedeGolpear) return;
         //combo golpe 1
         if (Input.GetKeyDown(golpeBasico) && !atacando)
         {
-            //atacando = true;
+            atacando = true;
             animacion.SetTrigger("combo1_"+combo1);
             
         }
 
         if (Input.GetKeyDown(patadaBasica))
         {
-            animacion.SetTrigger("patada_1");
+            animacion.SetTrigger("patada1_0");
         }
     }
 }

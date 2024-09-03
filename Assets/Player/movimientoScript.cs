@@ -80,6 +80,10 @@ public class movimientoScript : MonoBehaviour
         {
             isGrounded = true;
         }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+
+        }
     }
 
     void girar()

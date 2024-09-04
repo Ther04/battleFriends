@@ -125,7 +125,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: patada_1
+    m_ConditionEvent: patada1_0
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1279461109517707527}
@@ -231,7 +231,7 @@ AnimatorController:
   m_Name: personaje_1
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: patada_1
+  - m_Name: patada1_0
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -352,7 +352,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_AnyStatePosition: {x: 660, y: -170, z: 0}
   m_EntryPosition: {x: 360, y: -60, z: 0}
   m_ExitPosition: {x: 680, y: -20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

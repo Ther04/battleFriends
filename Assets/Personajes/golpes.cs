@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class golpes : MonoBehaviour
 {
-    [Header("oponente")]
-    [SerializeField]private string oponente = string.Empty;
-
     [Header("Objeto Cooldown")]
     [SerializeField]private cooldown Cooldown;
 
@@ -21,7 +18,7 @@ public class golpes : MonoBehaviour
     private bool finalCombo = false;
 
     [Header("animacion")]
-    public Animator animacion;
+    private Animator animacion;
     public KeyCode golpeBasico = KeyCode.Z;
     public KeyCode patadaBasica = KeyCode.X;
 

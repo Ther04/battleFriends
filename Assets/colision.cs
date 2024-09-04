@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class colision : MonoBehaviour
 {
-    private controlVidaOponente oponente;
+    [SerializeField] private string oponenteNombre;
+    private controlVida oponente;
     // Start is called before the first frame update
     void Start()
     {
-        oponente = GameObject.FindGameObjectWithTag("Enemy").GetComponent<controlVidaOponente>();
+        oponente = GameObject.FindGameObjectWithTag(oponenteNombre).GetComponent<controlVida>();
     }
 
     // Update is called once per frame

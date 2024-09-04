@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class golpes : MonoBehaviour
 {
+    [Header("oponente")]
+    [SerializeField]private string oponente = string.Empty;
+
     [Header("Objeto Cooldown")]
     [SerializeField]private cooldown Cooldown;
 
@@ -84,7 +88,7 @@ public class golpes : MonoBehaviour
         {
             atacando = true;
             animacion.SetTrigger("combo1_"+combo1);
-            
+            //tomarDamage();
         }
 
         if (Input.GetKeyDown(patadaBasica))
@@ -92,4 +96,23 @@ public class golpes : MonoBehaviour
             animacion.SetTrigger("patada1_"+combo2);
         }
     }
+
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.collider.CompareTag("supeior"))
+    //    {
+    //        collision.transform.GetComponent<controlVidaOponente>().damage(20);
+    //        UnityEngine.Debug.Log("entro");
+    //    }
+    //}
+
+    //private void (Collider2D collision)
+    //{
+    //    if(collision.CompareTag("superior"))
+    //    {
+    //        collision.transform.GetComponent<controlVidaOponente>().damage(20);
+    //        UnityEngine.Debug.Log("entro");
+    //    }
+    //}
 }

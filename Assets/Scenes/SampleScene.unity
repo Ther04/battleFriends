@@ -246,6 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119954881}
   - component: {fileID: 119954882}
+  - component: {fileID: 119954883}
   m_Layer: 0
   m_Name: ataqueMano1
   m_TagString: Untagged
@@ -303,6 +304,18 @@ CircleCollider2D:
   m_Offset: {x: -0.2954993, y: -0.025798494}
   serializedVersion: 2
   m_Radius: 0.18096533
+--- !u!114 &119954883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119954880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ceaca90141a7494bb9530489e3d8a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211810319
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +556,7 @@ GameObject:
   - component: {fileID: 340928759}
   m_Layer: 0
   m_Name: Personaje 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -652,6 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5c890a4827c954cb3da39c30eac2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oponente: 
   Cooldown:
     time: 0.25
   atacando: 0
@@ -1044,7 +1058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 770614602}
   - component: {fileID: 770614603}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inferior
   m_TagString: Inferior
   m_Icon: {fileID: 0}
@@ -1221,7 +1235,7 @@ GameObject:
   - component: {fileID: 928024754}
   m_Layer: 0
   m_Name: Player (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1747,7 +1761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1514279264}
   - component: {fileID: 1514279265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Superior
   m_TagString: Superior
   m_Icon: {fileID: 0}
@@ -1827,9 +1841,10 @@ GameObject:
   - component: {fileID: 1518524398}
   - component: {fileID: 1518524401}
   - component: {fileID: 1518524402}
+  - component: {fileID: 1518524403}
   m_Layer: 0
   m_Name: PersonajePrueba
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1848,8 +1863,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1514279264}
-  - {fileID: 637910051}
   - {fileID: 770614602}
+  - {fileID: 637910051}
   - {fileID: 657581026}
   m_Father: {fileID: 838153058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1938,6 +1953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5c890a4827c954cb3da39c30eac2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oponente: 
   Cooldown:
     time: 0
   atacando: 0
@@ -1958,9 +1974,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0906f4b035ae0249a98726c66b32a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barraVida: {fileID: 242466197}
+  barraVida: {fileID: 211810321}
   vida: 100
   vidaTotal: 100
+--- !u!114 &1518524403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518524394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4d0ba742d34b3409690c3c3267df76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1518524398}
+  BarraDeVida: {fileID: 1518524402}
 --- !u!1 &1742472628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,9 +2115,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1818830770}
   - component: {fileID: 1818830771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Superior
-  m_TagString: Untagged
+  m_TagString: Superior
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2162,6 +2192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1960803649}
   - component: {fileID: 1960803650}
+  - component: {fileID: 1960803651}
   m_Layer: 0
   m_Name: ataquePatada1
   m_TagString: Untagged
@@ -2219,6 +2250,18 @@ CircleCollider2D:
   m_Offset: {x: -0.009690822, y: -0.3717959}
   serializedVersion: 2
   m_Radius: 0.11882624
+--- !u!114 &1960803651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960803648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ceaca90141a7494bb9530489e3d8a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2035527087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,9 +2272,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2035527088}
   - component: {fileID: 2035527089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Inferior
-  m_TagString: Untagged
+  m_TagString: Inferior
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

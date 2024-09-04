@@ -82,9 +82,9 @@ public class movimientopj2 : MonoBehaviour
 
     void girar()
     {
-        //derecha = !derecha;
-        //Vector3 escala = transform.localScale;
-        //escala.x *= -1;
-        //transform.localScale = escala;
+        derecha = !derecha;
+        Vector3 escala = transform.localScale;
+        escala.x *= -1;
+        transform.localScale = escala;
     }
 }

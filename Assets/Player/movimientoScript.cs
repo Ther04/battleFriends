@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class movimientoScript : MonoBehaviour
 {
+    [Header("Teclas")]
+    [SerializeField]private KeyCode derecha = KeyCode.A;
+    [SerializeField]private KeyCode izquierda = KeyCode.D;
+    [SerializeField] private KeyCode salto = KeyCode.W;
+
     [Header("movimiento")]
     public float speed = 5f;
     public float jumpForce = 20f;
@@ -12,7 +18,7 @@ public class movimientoScript : MonoBehaviour
     private Vector3 velocidad = Vector3.zero;
     [Range(0, 0.3f)] public float suavizado;
     private bool isGrounded = true;
-    private bool derecha = true;
+    private bool derechaEsCierto = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +31,11 @@ public class movimientoScript : MonoBehaviour
     {
         //moverHorizontal = Input.GetAxis("Horizontal");
         moverHorizontal = 0f;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(izquierda))
         {
             moverHorizontal = -1f;
         }
-        else if (Input.GetKey(KeyCode.D)) 
+        else if (Input.GetKey(derecha)) 
         { 
             moverHorizontal = 1f; 
         } 
@@ -46,19 +52,19 @@ public class movimientoScript : MonoBehaviour
     {
 
 
-        if (moverHorizontal < 0 && derecha)
+        if (moverHorizontal < 0 && derechaEsCierto)
         {
             Vector3 escala = transform.localScale;
             escala.x *= -1;
             transform.localScale = escala;
-            derecha = false;
+            derechaEsCierto = false;
         }
-        else if (moverHorizontal > 0 && !derecha)
+        else if (moverHorizontal > 0 && !derechaEsCierto)
         {
             Vector3 escala = transform.localScale;
             escala.x *= -1;
             transform.localScale = escala;
-            derecha = true;
+            derechaEsCierto = true;
         }
         Vector2 movimiento = new Vector2(moverHorizontal * speed, rb.velocity.y);
         rb.velocity = movimiento;
@@ -67,7 +73,7 @@ public class movimientoScript : MonoBehaviour
 
     void saltar()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(salto) && isGrounded)
         {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             isGrounded = false; // Evita saltos múltiples

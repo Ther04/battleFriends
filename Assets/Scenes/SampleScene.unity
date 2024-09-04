@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cooldown:
-    time: 0
+    time: 0.25
   atacando: 0
   golpeBasico: 103
   patadaBasica: 104

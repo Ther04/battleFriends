@@ -24,7 +24,14 @@ public class colision : MonoBehaviour
         {
             oponente.damage(20);
         }
+
+        if (collision.collider.CompareTag("Inferior"))
+        {
+            oponente.damage(20);
+        }
     }
+
+
 
     //private void OnTriggerEnter2D(Collider2D other)
     //{

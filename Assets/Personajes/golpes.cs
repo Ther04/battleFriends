@@ -48,7 +48,7 @@ public class golpes : MonoBehaviour
         if(!finalCombo)
         {
             atacando = false;
-            if (combo1 < 2)
+            if (combo1 < 3)
             {
                 if (combo1 == 1)
                 {
@@ -70,11 +70,22 @@ public class golpes : MonoBehaviour
 
     public void finalizarCombo()
     {
+        Cooldown.empezarCooldown();
         atacando = false;
         finalCombo = false;
         combo1 = 0;
         combo2 = 0;
-        Cooldown.empezarCooldown();
+        
+    }
+
+    public void noPuedeGolpear() 
+    {
+        atacando = true;
+    }
+
+    public void puedeGolpear()
+    {
+        atacando = false;
     }
 
     void combos()
@@ -88,8 +99,9 @@ public class golpes : MonoBehaviour
             //tomarDamage();
         }
 
-        if (Input.GetKeyDown(patadaBasica))
+        if (Input.GetKeyDown(patadaBasica) && !atacando)
         {
+            atacando = true;
             animacion.SetTrigger("patada1_"+combo2);
         }
     }

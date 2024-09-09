@@ -9,6 +9,7 @@ public class movimientoScript : MonoBehaviour
     [SerializeField]private KeyCode derecha = KeyCode.A;
     [SerializeField]private KeyCode izquierda = KeyCode.D;
     [SerializeField] private KeyCode salto = KeyCode.W;
+    [SerializeField] private KeyCode agachado = KeyCode.S;
 
     [Header("movimiento")]
     public float speed = 5f;
@@ -18,12 +19,21 @@ public class movimientoScript : MonoBehaviour
     private Vector3 velocidad = Vector3.zero;
     [Range(0, 0.3f)] public float suavizado;
     private bool isGrounded = true;
-    private bool derechaEsCierto = true;
+    [SerializeField]private bool derechaEsCierto = false;
+    private Transform posOtro = null;
+    [SerializeField] private string TagOtro;
+
+    [Header("personaje")]
+    [SerializeField] private string nombre;
+    private Animator animator;
+    [SerializeField]private bool estaAgachado = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GameObject.FindGameObjectWithTag(nombre).GetComponent<Animator>();
+        posOtro = GameObject.FindGameObjectWithTag(TagOtro).GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -38,9 +48,14 @@ public class movimientoScript : MonoBehaviour
         else if (Input.GetKey(derecha)) 
         { 
             moverHorizontal = 1f; 
-        } 
-        saltar();
-        mover();
+        }
+        girar();
+        agacharse();
+        if (!estaAgachado)
+        {
+            saltar();
+            mover();
+        }
     }
 
     private void FixedUpdate()
@@ -48,24 +63,21 @@ public class movimientoScript : MonoBehaviour
         
     }
 
+    void agacharse()
+    {
+        if (Input.GetKey(agachado))
+        {
+            estaAgachado = true;
+            animator.SetBool("agachado", estaAgachado);
+        }
+        else
+        {
+            estaAgachado = false;
+            animator.SetBool("agachado", estaAgachado);
+        }
+    }
     void mover()
     {
-
-
-        if (moverHorizontal < 0 && derechaEsCierto)
-        {
-            Vector3 escala = transform.localScale;
-            escala.x *= -1;
-            transform.localScale = escala;
-            derechaEsCierto = false;
-        }
-        else if (moverHorizontal > 0 && !derechaEsCierto)
-        {
-            Vector3 escala = transform.localScale;
-            escala.x *= -1;
-            transform.localScale = escala;
-            derechaEsCierto = true;
-        }
         Vector2 movimiento = new Vector2(moverHorizontal * speed, rb.velocity.y);
         rb.velocity = movimiento;
         //rb.velocity = Vector3.SmoothDamp(rb.velocity, new Vector2(moverHorizontal * speed, rb.velocity.y), ref velocidad, suavizado);
@@ -94,6 +106,26 @@ public class movimientoScript : MonoBehaviour
 
     void girar()
     {
+        if(transform.position.x < posOtro.position.x && derechaEsCierto)
+        {
+            Vector3 escala = transform.localScale;
+            escala.x *= -1;
+            transform.localScale = escala;
+            Debug.Log("holaGiro");
+            derechaEsCierto = false;
+        }
+        else if(transform.position.x > posOtro.position.x && !derechaEsCierto)
+        {
+            Vector3 escala = transform.localScale;
+            escala.x *= -1;
+            transform.localScale = escala;
+            Debug.Log("holaGiro2");
+            derechaEsCierto = true;
+        }
+    }
 
+    public bool isAgachado()
+    {
+        return estaAgachado;
     }
 }

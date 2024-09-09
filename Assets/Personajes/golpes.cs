@@ -25,10 +25,15 @@ public class golpes : MonoBehaviour
     [Header("sonidos Animacion")]
     public AudioSource SonidoGolpe;
     public AudioClip[] miniSonidos;
+
+    [Header("Jugador")]
+    [SerializeField] private string nombre;
+    private movimientoScript movimiento;
     // Start is called before the first frame update
     void Start()
     {
         animacion = GetComponent<Animator>();
+        movimiento = GameObject.FindGameObjectWithTag(nombre).GetComponent<movimientoScript>();
     }
 
     // Update is called once per frame
@@ -99,29 +104,15 @@ public class golpes : MonoBehaviour
             //tomarDamage();
         }
 
-        if (Input.GetKeyDown(patadaBasica) && !atacando)
+        if (Input.GetKeyDown(patadaBasica) && !movimiento.isAgachado() && !atacando)
         {
             atacando = true;
             animacion.SetTrigger("patada1_"+combo2);
         }
+        if(Input.GetKeyDown(patadaBasica) && movimiento.isAgachado() && !atacando)
+        {
+            atacando= true;
+            animacion.SetTrigger("patadaBaja");
+        }
     }
-
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.collider.CompareTag("supeior"))
-    //    {
-    //        collision.transform.GetComponent<controlVidaOponente>().damage(20);
-    //        UnityEngine.Debug.Log("entro");
-    //    }
-    //}
-
-    //private void (Collider2D collision)
-    //{
-    //    if(collision.CompareTag("superior"))
-    //    {
-    //        collision.transform.GetComponent<controlVidaOponente>().damage(20);
-    //        UnityEngine.Debug.Log("entro");
-    //    }
-    //}
 }

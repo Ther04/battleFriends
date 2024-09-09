@@ -11,6 +11,8 @@ TagManager:
   - Enemy
   - BarraEnemigo
   - BarraPrincipal
+  - Principal
+  - Secundario
   layers:
   - Default
   - TransparentFX

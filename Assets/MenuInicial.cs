@@ -6,12 +6,12 @@ public class MenuInicial : MonoBehaviour
 {
     public void Jugar()
     {
-
+        Debug.Log("Jugar");
     }
 
     public void Instrucciones()
     {
-
+        Debug.Log("Instrucciones");
     }
     public void Salir()
     {

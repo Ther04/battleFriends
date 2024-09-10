@@ -317,6 +317,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oponenteNombre: Enemy
+  oponenteObjeto: Secundario
+  jugadorNombre: Player
+  damage: 2
 --- !u!1 &211810319
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +924,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oponenteNombre: Player
+  oponenteObjeto: Principal
+  jugadorNombre: Enemy
+  damage: 0
 --- !u!1 &657581025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1008,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oponenteNombre: Player
+  oponenteObjeto: Principal
+  jugadorNombre: Enemy
+  damage: 0
 --- !u!1 &707815273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1276,7 @@ MonoBehaviour:
   TagOtro: Principal
   nombre: Enemy
   estaAgachado: 0
+  velocidadImpulso: {x: 0, y: 0}
 --- !u!1 &928024753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,6 +1319,7 @@ MonoBehaviour:
   TagOtro: Secundario
   nombre: Player
   estaAgachado: 0
+  velocidadImpulso: {x: 0, y: 0}
 --- !u!50 &928024755
 Rigidbody2D:
   serializedVersion: 4
@@ -2347,6 +2358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oponenteNombre: Enemy
+  oponenteObjeto: Secundario
+  jugadorNombre: Player
+  damage: 3
 --- !u!70 &1960803652
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

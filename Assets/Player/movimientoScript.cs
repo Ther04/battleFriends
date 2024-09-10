@@ -28,6 +28,10 @@ public class movimientoScript : MonoBehaviour
     private Animator animator;
     [SerializeField]private bool estaAgachado = false;
 
+    [Header("impulsos")]
+    [SerializeField] private Vector2 velocidadImpulso;
+    private bool isGolpeado = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -78,8 +82,16 @@ public class movimientoScript : MonoBehaviour
     }
     void mover()
     {
-        Vector2 movimiento = new Vector2(moverHorizontal * speed, rb.velocity.y);
-        rb.velocity = movimiento;
+        if (isGolpeado)
+        {
+
+        }
+        else
+        {
+            Vector2 movimiento = new Vector2(moverHorizontal * speed, rb.velocity.y);
+            rb.velocity = movimiento;
+        }
+        
         //rb.velocity = Vector3.SmoothDamp(rb.velocity, new Vector2(moverHorizontal * speed, rb.velocity.y), ref velocidad, suavizado);
     }
 
@@ -111,7 +123,6 @@ public class movimientoScript : MonoBehaviour
             Vector3 escala = transform.localScale;
             escala.x *= -1;
             transform.localScale = escala;
-            Debug.Log("holaGiro");
             derechaEsCierto = false;
         }
         else if(transform.position.x > posOtro.position.x && !derechaEsCierto)
@@ -119,9 +130,24 @@ public class movimientoScript : MonoBehaviour
             Vector3 escala = transform.localScale;
             escala.x *= -1;
             transform.localScale = escala;
-            Debug.Log("holaGiro2");
             derechaEsCierto = true;
         }
+    }
+
+    public void recibioGolpeFuerte()
+    {
+        isGolpeado = true;
+        rb.AddForce(new Vector2(500,0),ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(1000, 0);
+        StartCoroutine(reiniciarGolpeado());
+        
+    }
+
+    IEnumerator reiniciarGolpeado()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        isGolpeado = false;
     }
 
     public bool isAgachado()

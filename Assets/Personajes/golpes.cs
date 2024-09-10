@@ -29,6 +29,7 @@ public class golpes : MonoBehaviour
     [Header("Jugador")]
     [SerializeField] private string nombre;
     private movimientoScript movimiento;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +41,6 @@ public class golpes : MonoBehaviour
     void Update()
     {
         combos();
-        //Debug.Log(combo1);
     }
 
     private void FixedUpdate()
@@ -115,4 +115,6 @@ public class golpes : MonoBehaviour
             animacion.SetTrigger("patadaBaja");
         }
     }
+
+    public int getCombo1() {  return combo1; }
 }

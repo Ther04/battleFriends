@@ -29,6 +29,7 @@ public class golpes : MonoBehaviour
     [Header("Jugador")]
     [SerializeField] private string nombre;
     private movimientoScript movimiento;
+    private bool puedeDefender = true;
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +81,19 @@ public class golpes : MonoBehaviour
         finalCombo = false;
         combo1 = 0;
         combo2 = 0;
-        
+        movimiento.cooldownDefensa();
+        puedeDefender = true;
+
+    }
+
+    public void terminoDefensa()
+    {
+        Cooldown.empezarCooldown();
+        atacando = false;
+        finalCombo = false;
+        combo1 = 0;
+        combo2 = 0;
+        puedeDefender = true;
     }
 
     public void noPuedeGolpear() 
@@ -100,6 +113,7 @@ public class golpes : MonoBehaviour
         if (Input.GetKeyDown(golpeBasico) && !atacando)
         {
             atacando = true;
+            puedeDefender = false;
             animacion.SetTrigger("combo1_"+combo1);
             //tomarDamage();
         }
@@ -107,14 +121,21 @@ public class golpes : MonoBehaviour
         if (Input.GetKeyDown(patadaBasica) && !movimiento.isAgachado() && !atacando)
         {
             atacando = true;
+            puedeDefender = false;
             animacion.SetTrigger("patada1_"+combo2);
         }
         if(Input.GetKeyDown(patadaBasica) && movimiento.isAgachado() && !atacando)
         {
             atacando= true;
+            puedeDefender = false;
             animacion.SetTrigger("patadaBaja");
         }
     }
 
     public int getCombo1() {  return combo1; }
+
+    public bool getPuedeDefender() 
+    {
+        return puedeDefender; 
+    }
 }

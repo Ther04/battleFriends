@@ -10,6 +10,10 @@ public class movimientoScript : MonoBehaviour
     [SerializeField]private KeyCode izquierda = KeyCode.D;
     [SerializeField] private KeyCode salto = KeyCode.W;
     [SerializeField] private KeyCode agachado = KeyCode.S;
+    [SerializeField] private KeyCode defender = KeyCode.C;
+
+    [Header("Objeto Cooldown")]
+    [SerializeField] private cooldown Cooldown;
 
     [Header("movimiento")]
     public float speed = 5f;
@@ -26,10 +30,11 @@ public class movimientoScript : MonoBehaviour
     [Header("personaje")]
     [SerializeField] private string nombre;
     private Animator animator;
-    [SerializeField]private bool estaAgachado = false;
+    private golpes combo;
+    private bool estaAgachado = false;
+    private bool defendiendo = false;
 
     [Header("impulsos")]
-    [SerializeField] private Vector2 velocidadImpulso;
     private bool isGolpeado = false;
 
     // Start is called before the first frame update
@@ -38,6 +43,7 @@ public class movimientoScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GameObject.FindGameObjectWithTag(nombre).GetComponent<Animator>();
         posOtro = GameObject.FindGameObjectWithTag(TagOtro).GetComponent<Transform>();
+        combo = GameObject.FindGameObjectWithTag(nombre).GetComponent<golpes>();
     }
 
     // Update is called once per frame
@@ -54,12 +60,17 @@ public class movimientoScript : MonoBehaviour
             moverHorizontal = 1f; 
         }
         girar();
-        agacharse();
-        if (!estaAgachado)
+        defenderse();
+        if(!defendiendo)
         {
-            saltar();
-            mover();
+            agacharse();
+            if (!estaAgachado)
+            {
+                saltar();
+                mover();
+            }
         }
+        
     }
 
     private void FixedUpdate()
@@ -134,18 +145,47 @@ public class movimientoScript : MonoBehaviour
         }
     }
 
+    void defenderse()
+    {
+        if (Cooldown.noPuedeGolpear) return;
+        if (Input.GetKey(defender) && combo.getPuedeDefender())
+        {
+            defendiendo = true;
+            animator.SetBool("defensa", defendiendo);
+            combo.terminoDefensa();
+        }
+        else
+        {
+            defendiendo = false;
+            animator.SetBool("defensa", defendiendo);
+        }
+    }
+
     public void recibioGolpeFuerte()
     {
         isGolpeado = true;
-        rb.AddForce(new Vector2(500,0),ForceMode2D.Impulse);
-        //rb.velocity = new Vector2(1000, 0);
+        if (!derechaEsCierto)
+        {
+            rb.AddForce(new Vector2(500, 0), ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb.AddForce(new Vector2(-500, 0), ForceMode2D.Impulse);
+        }
+        
         StartCoroutine(reiniciarGolpeado());
         
     }
 
+    public void golpeado()
+    {
+        isGolpeado = true;
+        StartCoroutine(reiniciarGolpeado());
+    }
+
     IEnumerator reiniciarGolpeado()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.80f);
 
         isGolpeado = false;
     }
@@ -153,5 +193,17 @@ public class movimientoScript : MonoBehaviour
     public bool isAgachado()
     {
         return estaAgachado;
+    }
+
+    public bool getDefendiendo() {  return defendiendo; }
+
+    public void setDefendiendo(bool defen)
+    {
+        defendiendo = defen;
+    }
+
+    public void cooldownDefensa()
+    {
+        Cooldown.empezarCooldown();
     }
 }

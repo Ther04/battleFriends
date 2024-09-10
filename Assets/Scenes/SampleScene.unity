@@ -691,6 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e222785ef9aea439da76743b31908e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagNombre: Principal
 --- !u!114 &340928761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,9 +704,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0906f4b035ae0249a98726c66b32a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barraVida: {fileID: 242466197}
   vida: 100
   vidaTotal: 100
+  tagNombreBarra: BarraPrincipal
 --- !u!1 &352704126
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +927,7 @@ MonoBehaviour:
   oponenteNombre: Player
   oponenteObjeto: Principal
   jugadorNombre: Enemy
-  damage: 0
+  damage: 2
 --- !u!1 &657581025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1011,7 @@ MonoBehaviour:
   oponenteNombre: Player
   oponenteObjeto: Principal
   jugadorNombre: Enemy
-  damage: 0
+  damage: 3
 --- !u!1 &707815273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,6 +1269,9 @@ MonoBehaviour:
   izquierda: 276
   salto: 273
   agachado: 274
+  defender: 106
+  Cooldown:
+    time: 0
   speed: 500
   jumpForce: 1200
   moverHorizontal: 0
@@ -1275,8 +1279,6 @@ MonoBehaviour:
   derechaEsCierto: 0
   TagOtro: Principal
   nombre: Enemy
-  estaAgachado: 0
-  velocidadImpulso: {x: 0, y: 0}
 --- !u!1 &928024753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1291,7 @@ GameObject:
   - component: {fileID: 928024755}
   - component: {fileID: 928024754}
   m_Layer: 0
-  m_Name: Player (1)
+  m_Name: oriP1
   m_TagString: Principal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1311,6 +1313,9 @@ MonoBehaviour:
   izquierda: 97
   salto: 119
   agachado: 115
+  defender: 99
+  Cooldown:
+    time: 0.25
   speed: 500
   jumpForce: 1200
   moverHorizontal: 0
@@ -1318,8 +1323,6 @@ MonoBehaviour:
   derechaEsCierto: 0
   TagOtro: Secundario
   nombre: Player
-  estaAgachado: 0
-  velocidadImpulso: {x: 0, y: 0}
 --- !u!50 &928024755
 Rigidbody2D:
   serializedVersion: 4
@@ -1909,7 +1912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1518524395
 Transform:
   m_ObjectHideFlags: 0
@@ -2034,9 +2037,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0906f4b035ae0249a98726c66b32a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barraVida: {fileID: 211810321}
   vida: 100
   vidaTotal: 100
+  tagNombreBarra: 
 --- !u!114 &1518524403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2049,6 +2052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e222785ef9aea439da76743b31908e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagNombre: 
 --- !u!1 &1742472628
 GameObject:
   m_ObjectHideFlags: 0

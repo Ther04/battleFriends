@@ -27,7 +27,7 @@ public class colision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Superior"))
+        if (collision.collider.CompareTag("Superior") && !mov.getDefendiendo())
         {
             if("combo1_2" == "combo1_" + Golpes.getCombo1())
             {
@@ -37,6 +37,7 @@ public class colision : MonoBehaviour
             }
             else
             {
+                mov.golpeado();
                 oponente.damage(damage);
             }
             
@@ -44,6 +45,7 @@ public class colision : MonoBehaviour
 
         if (collision.collider.CompareTag("Inferior"))
         {
+            mov.golpeado();
             oponente.damage(damage);
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MenuInicial : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class MenuInicial : MonoBehaviour
     public void Jugar()
     {
         Debug.Log("Jugar");
+        SceneManager.LoadScene("SeleccionPjs");
     }
 
     public void Instrucciones()

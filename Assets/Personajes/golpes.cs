@@ -53,6 +53,7 @@ public class golpes : MonoBehaviour
     {
         if(!finalCombo)
         {
+            //UnityEngine.Debug.Log(combo1);
             atacando = false;
             if (combo1 < 3)
             {
@@ -104,6 +105,7 @@ public class golpes : MonoBehaviour
     public void puedeGolpear()
     {
         atacando = false;
+        finalizarCombo();
     }
 
     void combos()

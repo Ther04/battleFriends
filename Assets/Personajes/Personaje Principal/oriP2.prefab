@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vida: 100
   vidaTotal: 100
-  tagNombreBarra: barraEnemigo
+  tagNombreBarra: BarraEnemigo
 --- !u!114 &743274443444946556
 MonoBehaviour:
   m_ObjectHideFlags: 0

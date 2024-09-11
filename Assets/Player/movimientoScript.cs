@@ -166,11 +166,11 @@ public class movimientoScript : MonoBehaviour
         isGolpeado = true;
         if (!derechaEsCierto)
         {
-            rb.AddForce(new Vector2(500, 0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(-1000, 0), ForceMode2D.Impulse);
         }
         else
         {
-            rb.AddForce(new Vector2(-500, 0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(1000, 0), ForceMode2D.Impulse);
         }
         
         StartCoroutine(reiniciarGolpeado());

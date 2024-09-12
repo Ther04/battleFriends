@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class manejoRound : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class manejoRound : MonoBehaviour
     private instanciarPlayer posicionJugadores;
     private bool seAcaboLaPelea = false;
 
+    [Header("UI")]
+    public GameObject avisos;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,15 @@ public class manejoRound : MonoBehaviour
         cuadradoP2_0.SetActive(false);
         cuadradoP2_1.SetActive(false);
 
+        avisos = GameObject.Find("Avisos");
+        if (avisos != null)
+        {
+            avisos.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Avisos Null");
+        }
     }
 
     // Update is called once per frame
@@ -59,6 +72,7 @@ public class manejoRound : MonoBehaviour
             {
                 case 0:
                     cuadradoP2_0.SetActive(true);
+                    StartCoroutine(GestionarRound("Jugador 2"));
                     barrasPersonajes[0].vida = 100f;
                     barrasPersonajes[1].vida = 100f;
                     movPers[0].reestablecerPosicion(posicionJugadores.posP1);
@@ -72,6 +86,8 @@ public class manejoRound : MonoBehaviour
                     seAcaboLaPelea = true;
                     movPers[0].terminoCombate(seAcaboLaPelea);
                     movPers[1].terminoCombate(seAcaboLaPelea);
+                    StartCoroutine(GestionarRound("Jugador 2"));
+                    SceneManager.LoadScene("Menu");
                     break;
 
                 default:
@@ -83,6 +99,7 @@ public class manejoRound : MonoBehaviour
             {
                 case 0:
                     cuadradoP1_0.SetActive(true);
+                    StartCoroutine(GestionarRound("Jugador 1"));
                     barrasPersonajes[0].vida = 100f;
                     barrasPersonajes[1].vida = 100f;
                     movPers[0].reestablecerPosicion(posicionJugadores.posP1);
@@ -95,11 +112,34 @@ public class manejoRound : MonoBehaviour
                     seAcaboLaPelea = true;
                     movPers[0].terminoCombate(seAcaboLaPelea);
                     movPers[1].terminoCombate(seAcaboLaPelea);
+                    StartCoroutine(GestionarRound("Jugador 1"));
+                    SceneManager.LoadScene("Menu");
                     break;
 
                 default:
                     break;
             }
+        }
+    }
+    IEnumerator GestionarRound(string ganador)
+    {
+        avisos.SetActive(true);
+        avisos.GetComponent<Text>().text ="¡"+ ganador + " ganó el round!";
+        yield return new WaitForSeconds(2); // Pausa de 2 segundos para mostrar el ganador
+        avisos.SetActive(false); // Ocultar el mensaje del ganador del round
+
+        if (seAcaboLaPelea)
+        {
+            avisos.SetActive(true);
+            avisos.GetComponent<Text>().text = "¡"+ganador + " es el ganador!";
+            yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de volver al menú
+        }
+        else
+        {
+            avisos.SetActive(true);
+            avisos.GetComponent<Text>().text = "Start!";
+            yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de reiniciar el round
+            avisos.SetActive(false);
         }
     }
 }

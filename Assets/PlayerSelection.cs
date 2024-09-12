@@ -138,8 +138,6 @@ public class PlayerSelection : MonoBehaviour
         SelectedCharacters.p1CharacterID = p1CharacterID;
         SelectedCharacters.p2CharacterID = p2CharacterID;
         yield return new WaitForSeconds(5);
-        //SelectedCharacters.p1CharacterID = p1CharacterID;
-        //SelectedCharacters.p2CharacterID = p2CharacterID;
-        //SceneManager.LoadScene("NextScene");
+        SceneManager.LoadScene("SampleScene");
     }
 }

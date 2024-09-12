@@ -13,8 +13,8 @@ public class instanciarPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(personajesP1[0], posP1, transform.rotation);
-        Instantiate(personajesP2[2], posP2, transform.rotation);
+        Instantiate(personajesP1[SelectedCharacters.p1CharacterID], posP1, transform.rotation);
+        Instantiate(personajesP2[SelectedCharacters.p2CharacterID], posP2, transform.rotation);
         Instantiate(round);
     }
 

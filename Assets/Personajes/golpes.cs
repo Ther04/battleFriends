@@ -36,6 +36,7 @@ public class golpes : MonoBehaviour
     {
         animacion = GetComponent<Animator>();
         movimiento = GameObject.FindGameObjectWithTag(nombre).GetComponent<movimientoScript>();
+        SonidoGolpe = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -121,6 +122,8 @@ public class golpes : MonoBehaviour
             atacando = true;
             puedeDefender = false;
             animacion.SetTrigger("combo1_"+combo1);
+            SonidoGolpe.clip = miniSonidos[combo1];
+            SonidoGolpe.Play();
             //tomarDamage();
         }
 
@@ -129,12 +132,16 @@ public class golpes : MonoBehaviour
             atacando = true;
             puedeDefender = false;
             animacion.SetTrigger("patada1_"+combo2);
+            SonidoGolpe.clip = miniSonidos[3];
+            SonidoGolpe.Play();
         }
         if(Input.GetKeyDown(patadaBasica) && movimiento.isAgachado() && !atacando)
         {
             atacando= true;
             puedeDefender = false;
             animacion.SetTrigger("patadaBaja");
+            SonidoGolpe.clip = miniSonidos[4];
+            SonidoGolpe.Play();
         }
     }
 

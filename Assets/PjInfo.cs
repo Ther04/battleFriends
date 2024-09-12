@@ -6,5 +6,5 @@ public class PjInfo : MonoBehaviour
 {
     public int posX;
     public int posY;
-    public string charId;
+    public int charId;
 }

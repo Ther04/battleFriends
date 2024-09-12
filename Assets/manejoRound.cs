@@ -27,6 +27,10 @@ public class manejoRound : MonoBehaviour
 
     [Header("UI")]
     private GameObject avisos;
+
+    [Header("efectosSonido")]
+    private AudioSource sfx;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,8 @@ public class manejoRound : MonoBehaviour
         movPers[1] = GameObject.FindGameObjectWithTag("Secundario").GetComponent<movimientoScript>();
 
         posicionJugadores = GameObject.Find("InstanciarPersonajes").GetComponent<instanciarPlayer>();
+
+        sfx = GetComponent<AudioSource>();
 
         cuadradoP1_0.SetActive(false);
         cuadradoP1_1.SetActive(false);
@@ -74,7 +80,7 @@ public class manejoRound : MonoBehaviour
             {
                 case 0:
                     cuadradoP2_0.SetActive(true);
-                    StartCoroutine(GestionarRound("Jugador 2"));
+                    StartCoroutine(GestionarRound("Jugador 2", ganoP2));
                     barrasPersonajes[0].vida = 100f;
                     barrasPersonajes[1].vida = 100f;
                     movPers[0].reestablecerPosicion(posicionJugadores.posP1);
@@ -88,7 +94,7 @@ public class manejoRound : MonoBehaviour
                     seAcaboLaPelea = true;
                     movPers[0].terminoCombate(seAcaboLaPelea);
                     movPers[1].terminoCombate(seAcaboLaPelea);
-                    StartCoroutine(GestionarRound("Jugador 2"));
+                    StartCoroutine(GestionarRound("Jugador 2", ganoP2));
                     break;
 
                 default:
@@ -100,7 +106,7 @@ public class manejoRound : MonoBehaviour
             {
                 case 0:
                     cuadradoP1_0.SetActive(true);
-                    StartCoroutine(GestionarRound("Jugador 1"));
+                    StartCoroutine(GestionarRound("Jugador 1", ganoP1));
                     barrasPersonajes[0].vida = 100f;
                     barrasPersonajes[1].vida = 100f;
                     movPers[0].reestablecerPosicion(posicionJugadores.posP1);
@@ -113,7 +119,7 @@ public class manejoRound : MonoBehaviour
                     seAcaboLaPelea = true;
                     movPers[0].terminoCombate(seAcaboLaPelea);
                     movPers[1].terminoCombate(seAcaboLaPelea);
-                    StartCoroutine(GestionarRound("Jugador 1"));
+                    StartCoroutine(GestionarRound("Jugador 1", ganoP1));
                     break;
 
                 default:
@@ -121,20 +127,23 @@ public class manejoRound : MonoBehaviour
             }
         }
     }
-    IEnumerator GestionarRound(string ganador)
+    IEnumerator GestionarRound(string ganador, int gan)
     {
-        movPers[0].setPausa(true);
-        movPers[1].setPausa(true);
-        avisos.SetActive(true);
-        avisos.GetComponent<Text>().text ="¡"+ ganador + " ganó el round!";
-        yield return new WaitForSeconds(2); // Pausa de 2 segundos para mostrar el ganador
-        avisos.SetActive(false); // Ocultar el mensaje del ganador del round
+        if (gan == 0)
+        {
+            movPers[0].setPausa(true);
+            movPers[1].setPausa(true);
+            avisos.SetActive(true);
+            avisos.GetComponent<Text>().text = "¡" + ganador + " ganó el round!";
+            yield return new WaitForSeconds(2); // Pausa de 2 segundos para mostrar el ganador
+            avisos.SetActive(false); // Ocultar el mensaje del ganador del round
+        }
 
         if (seAcaboLaPelea)
         {
             avisos.SetActive(true);
             avisos.GetComponent<Text>().text = "¡"+ganador + " es el ganador!";
-            yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de volver al menú
+            yield return new WaitForSeconds(1.5f); // Pausa de 2 segundos antes de volver al menú
             SceneManager.LoadScene("Menu");
         }
         else
@@ -146,8 +155,10 @@ public class manejoRound : MonoBehaviour
                 avisos.GetComponent<Text>().text = "" + (i);
                 yield return new WaitForSeconds(1);
             }
-            
-            avisos.GetComponent<Text>().text = "Start!";
+
+
+            avisos.GetComponent<Text>().text = "FIGHT!";
+            sfx.Play();
             yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de reiniciar el round
             movPers[0].setPausa(false);
             movPers[1].setPausa(false);
@@ -165,7 +176,8 @@ public class manejoRound : MonoBehaviour
             avisos.GetComponent<Text>().text = "" + (i);
             yield return new WaitForSeconds(1);
         }
-        avisos.GetComponent<Text>().text = "Start!";
+        avisos.GetComponent<Text>().text = "FIGHT!";
+        sfx.Play();
         yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de reiniciar el round
         movPers[0].setPausa(false);
         movPers[1].setPausa(false);

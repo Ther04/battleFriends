@@ -81,6 +81,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.21666667
+    functionName: finalizarCombo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.23333333
     functionName: puedeGolpear
     data: 
     objectReferenceParameter: {fileID: 0}

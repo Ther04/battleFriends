@@ -13,6 +13,10 @@ TagManager:
   - BarraPrincipal
   - Principal
   - Secundario
+  - round1_0
+  - round1_1
+  - round2_0
+  - round2_1
   layers:
   - Default
   - TransparentFX

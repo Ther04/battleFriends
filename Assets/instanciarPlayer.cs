@@ -7,6 +7,7 @@ public class instanciarPlayer : MonoBehaviour
 
     public GameObject[] personajesP1;
     public GameObject[] personajesP2;
+    public GameObject round;
     public Vector2 posP1;
     public Vector2 posP2;
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class instanciarPlayer : MonoBehaviour
     {
         Instantiate(personajesP1[0], posP1, transform.rotation);
         Instantiate(personajesP2[2], posP2, transform.rotation);
+        Instantiate(round);
     }
 
     // Update is called once per frame

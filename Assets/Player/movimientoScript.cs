@@ -15,6 +15,9 @@ public class movimientoScript : MonoBehaviour
     [Header("Objeto Cooldown")]
     [SerializeField] private cooldown Cooldown;
 
+    //posicion objeto
+    private Transform pos;
+
     [Header("movimiento")]
     public float speed = 5f;
     public float jumpForce = 20f;
@@ -26,6 +29,7 @@ public class movimientoScript : MonoBehaviour
     [SerializeField]private bool derechaEsCierto = false;
     private Transform posOtro = null;
     [SerializeField] private string TagOtro;
+    private bool combateFin = false;
 
     [Header("personaje")]
     [SerializeField] private string nombre;
@@ -44,30 +48,36 @@ public class movimientoScript : MonoBehaviour
         animator = GameObject.FindGameObjectWithTag(nombre).GetComponent<Animator>();
         posOtro = GameObject.FindGameObjectWithTag(TagOtro).GetComponent<Transform>();
         combo = GameObject.FindGameObjectWithTag(nombre).GetComponent<golpes>();
+        pos = GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //moverHorizontal = Input.GetAxis("Horizontal");
-        moverHorizontal = 0f;
-        if (Input.GetKey(izquierda))
+        if (!combateFin)
         {
-            moverHorizontal = -1f;
-        }
-        else if (Input.GetKey(derecha)) 
-        { 
-            moverHorizontal = 1f; 
-        }
-        girar();
-        defenderse();
-        if(!defendiendo)
-        {
-            agacharse();
-            if (!estaAgachado)
+
+
+            moverHorizontal = 0f;
+            if (Input.GetKey(izquierda))
             {
-                saltar();
-                mover();
+                moverHorizontal = -1f;
+            }
+            else if (Input.GetKey(derecha))
+            {
+                moverHorizontal = 1f;
+            }
+            girar();
+            defenderse();
+            if (!defendiendo)
+            {
+                agacharse();
+                if (!estaAgachado)
+                {
+                    saltar();
+                    mover();
+                }
             }
         }
         
@@ -206,4 +216,16 @@ public class movimientoScript : MonoBehaviour
     {
         Cooldown.empezarCooldown();
     }
+
+    public void reestablecerPosicion(Vector2 posVec)
+    {
+        transform.position = posVec;
+    }
+
+    public void terminoCombate(bool termino)
+    {
+        combateFin = termino;
+    }
+
+    public bool getCombateFin() { return combateFin; }
 }

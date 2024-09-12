@@ -23,9 +23,10 @@ public class manejoRound : MonoBehaviour
     private movimientoScript[] movPers = new movimientoScript[2];
     private instanciarPlayer posicionJugadores;
     private bool seAcaboLaPelea = false;
+    private bool pausar = false;
 
     [Header("UI")]
-    public GameObject avisos;
+    private GameObject avisos;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +57,7 @@ public class manejoRound : MonoBehaviour
         {
             Debug.Log("Avisos Null");
         }
+        StartCoroutine(empezarRound());
     }
 
     // Update is called once per frame
@@ -87,7 +89,6 @@ public class manejoRound : MonoBehaviour
                     movPers[0].terminoCombate(seAcaboLaPelea);
                     movPers[1].terminoCombate(seAcaboLaPelea);
                     StartCoroutine(GestionarRound("Jugador 2"));
-                    SceneManager.LoadScene("Menu");
                     break;
 
                 default:
@@ -113,7 +114,6 @@ public class manejoRound : MonoBehaviour
                     movPers[0].terminoCombate(seAcaboLaPelea);
                     movPers[1].terminoCombate(seAcaboLaPelea);
                     StartCoroutine(GestionarRound("Jugador 1"));
-                    SceneManager.LoadScene("Menu");
                     break;
 
                 default:
@@ -123,6 +123,8 @@ public class manejoRound : MonoBehaviour
     }
     IEnumerator GestionarRound(string ganador)
     {
+        movPers[0].setPausa(true);
+        movPers[1].setPausa(true);
         avisos.SetActive(true);
         avisos.GetComponent<Text>().text ="¡"+ ganador + " ganó el round!";
         yield return new WaitForSeconds(2); // Pausa de 2 segundos para mostrar el ganador
@@ -133,13 +135,40 @@ public class manejoRound : MonoBehaviour
             avisos.SetActive(true);
             avisos.GetComponent<Text>().text = "¡"+ganador + " es el ganador!";
             yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de volver al menú
+            SceneManager.LoadScene("Menu");
         }
         else
         {
             avisos.SetActive(true);
+            for (int i = 3; i > 0; i--)
+            {
+                
+                avisos.GetComponent<Text>().text = "" + (i);
+                yield return new WaitForSeconds(1);
+            }
+            
             avisos.GetComponent<Text>().text = "Start!";
             yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de reiniciar el round
+            movPers[0].setPausa(false);
+            movPers[1].setPausa(false);
             avisos.SetActive(false);
         }
+    }
+
+    IEnumerator empezarRound()
+    {
+        movPers[0].setPausa(true);
+        movPers[1].setPausa(true);
+        avisos.SetActive (true);
+        for(int i = 3; i > 0;i--)
+        {
+            avisos.GetComponent<Text>().text = "" + (i);
+            yield return new WaitForSeconds(1);
+        }
+        avisos.GetComponent<Text>().text = "Start!";
+        yield return new WaitForSeconds(2); // Pausa de 2 segundos antes de reiniciar el round
+        movPers[0].setPausa(false);
+        movPers[1].setPausa(false);
+        avisos.SetActive(false);
     }
 }

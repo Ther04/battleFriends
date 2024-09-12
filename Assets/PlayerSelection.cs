@@ -19,6 +19,8 @@ public class PlayerSelection : MonoBehaviour
     private bool p2Selected = false;
     private int p1CharacterID;
     private int p2CharacterID;
+    public GameObject[] characterContainerP1;
+    public GameObject[] characterContainerP2;
 
     void Start()
     {
@@ -62,7 +64,7 @@ public class PlayerSelection : MonoBehaviour
         {
             p1Selected = true;
             p1CharacterID = grid[p1X, p1Y].charId;
-            ShowCharacterImage(p1CharacterID, characterImage1);
+            ShowCharacterImage(p1CharacterID, characterImage1, 1);
             Debug.Log($"P1 seleccionado {p1CharacterID}");
         }
 
@@ -77,7 +79,7 @@ public class PlayerSelection : MonoBehaviour
         {
             p2Selected = true;
             p2CharacterID = grid[p2X, p2Y].charId;
-            ShowCharacterImage(p2CharacterID, characterImage2);
+            ShowCharacterImage(p2CharacterID, characterImage2, 2);
             Debug.Log($"P2 seleccionado {p2CharacterID}");
         }
 
@@ -95,29 +97,39 @@ public class PlayerSelection : MonoBehaviour
         if(!p2Selected){ p2Selector.transform.position = grid[p2X, p2Y].transform.position; }
     }
 
-    void ShowCharacterImage(int characterID, Image personajeboton)
+    void ShowCharacterImage(int characterID, Image personajeboton, int P)
     {
-        PjInfo button = FindButtonById(characterID);
-        if (button != null)
+        switch (P)
         {
-            Image buttonImage = button.GetComponent<Image>();
-            if (buttonImage != null)
-            {
-                Debug.Log("deberia mostrar imagen");
-                Color color = personajeboton.color;
-                personajeboton.sprite = buttonImage.sprite;
-                color.a = 1f;
-                personajeboton.color = color;
-            }
-            else
-            {
-                Debug.LogError("Button Image component is missing.");
-            }
+            case 1:
+                Instantiate(characterContainerP1[characterID]);
+                break;
+
+            case 2:
+                Instantiate(characterContainerP2[characterID]);
+                break;
         }
-        else
-        {
-            Debug.LogError("Button with character ID not found.");
-        }
+        //PjInfo button = FindButtonById(characterID);
+        //if (button != null)
+        //{
+        //    Image buttonImage = button.GetComponent<Image>();
+        //    if (buttonImage != null)
+        //    {
+        //        Debug.Log("deberia mostrar imagen");
+        //        Color color = personajeboton.color;
+        //        personajeboton.sprite = buttonImage.sprite;
+        //        color.a = 1f;
+        //        personajeboton.color = color;
+        //    }
+        //    else
+        //    {
+        //        Debug.LogError("Button Image component is missing.");
+        //    }
+        //}
+        //else
+        //{
+        //    Debug.LogError("Button with character ID not found.");
+        //}
     }
 
     PjInfo FindButtonById(int characterID)

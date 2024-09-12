@@ -30,6 +30,7 @@ public class movimientoScript : MonoBehaviour
     private Transform posOtro = null;
     [SerializeField] private string TagOtro;
     private bool combateFin = false;
+    private bool pausa = false;
 
     [Header("personaje")]
     [SerializeField] private string nombre;
@@ -55,7 +56,7 @@ public class movimientoScript : MonoBehaviour
     void Update()
     {
         //moverHorizontal = Input.GetAxis("Horizontal");
-        if (!combateFin)
+        if (!combateFin && !pausa)
         {
 
 
@@ -228,4 +229,8 @@ public class movimientoScript : MonoBehaviour
     }
 
     public bool getCombateFin() { return combateFin; }
+
+    public void setPausa(bool pause) { pausa = pause; }
+
+    public bool getPausa() { return pausa; }
 }

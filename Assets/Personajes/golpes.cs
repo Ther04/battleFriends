@@ -42,7 +42,7 @@ public class golpes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!movimiento.getCombateFin())
+        if (!movimiento.getCombateFin() && !movimiento.getPausa())
         {
             combos();
         }
